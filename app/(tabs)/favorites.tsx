@@ -19,7 +19,7 @@ export default function FavoriteScreen () {
           className="flex-1"
           contentContainerStyle={{ padding: 16 }}
           data={meals}
-          renderItem={({ item }) => <MealCard meal={item} isFavorite={true}/>}
+          renderItem={({ item }) => <MealCard meal={item}/>}
           keyExtractor={(item) => item.idMeal.toString()}
           ListEmptyComponent={
             <View className="flex-1 justify-center items-center pt-20">

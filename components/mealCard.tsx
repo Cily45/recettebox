@@ -6,7 +6,7 @@ import { IconButton } from 'react-native-paper'
 import { addItemFavorite, removeItemFavorite } from '@/components/favoriteSlice'
 import { useAppDispatch, useAppSelector } from '@/store/hook'
 
-export default function MealCard (props: { meal: Meal, isFavorite?: boolean, category?: string }) {
+export default function MealCard (props: { meal: Meal, category?: string }) {
   const router = useRouter()
   const favoritesMeals = useAppSelector((s) => s.favorites.meals)
   const [isInFavorites, setIsInFavorites] = useState<boolean>(false)
@@ -25,14 +25,6 @@ export default function MealCard (props: { meal: Meal, isFavorite?: boolean, cat
         router.push(`/${props.meal.idMeal}`)
       }}
     >
-      <View className="absolute z-50 right-0">
-        {props.isFavorite &&
-          (<IconButton icon={'close'}
-                       mode={'contained-tonal'}
-                       onPress={() => dispatch(removeItemFavorite(props.meal.idMeal))}/>
-          )}
-      </View>
-
       <Image
         source={{ uri: props.meal.strMealThumb }}
         className="h-48"
@@ -44,6 +36,14 @@ export default function MealCard (props: { meal: Meal, isFavorite?: boolean, cat
           <Text className="text-white text-xl font-bold truncate">
             {props.meal.strMeal}
           </Text>
+        </View>
+        <View className="mt-2 flex-row items-center justify-between">
+          <View className="bg-orange-500 px-3 py-1 rounded-full">
+            <Text className="text-white text-xs font-semibold uppercase">
+              {props.category ? props.category : props.meal.strCategory}
+            </Text>
+          </View>
+
           {isInFavorites && (
             <IconButton icon="heart"
                         onPress={() => dispatch(removeItemFavorite(props.meal?.idMeal))}/>)
@@ -52,13 +52,6 @@ export default function MealCard (props: { meal: Meal, isFavorite?: boolean, cat
             <IconButton icon="heart-outline"
                         onPress={() => dispatch(addItemFavorite(props.meal))}/>)
           }
-        </View>
-        <View className="mt-2 flex-row items-center">
-          <View className="bg-orange-500 px-3 py-1 rounded-full">
-            <Text className="text-white text-xs font-semibold uppercase">
-              {props.category ? props.category : props.meal.strCategory}
-            </Text>
-          </View>
         </View>
       </View>
     </TouchableOpacity>

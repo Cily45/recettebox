@@ -16,7 +16,7 @@ export default function HomeScreen () {
     }
   }, [isError])
   return (
-    <View className="h-screen py-20 flex justify-around items-center">
+    <View className="h-screen py-20 px-4 flex justify-around items-center">
       <Text className={'text-xl font-bold text-white'}>Accueil</Text>
       {!isLoading && data?.meals[0] && (
         <><MealCard meal={data?.meals[0]!}></MealCard><Button

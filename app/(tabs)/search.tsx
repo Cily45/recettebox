@@ -82,14 +82,14 @@ export default function SearchScreen () {
 
       {!isSearchOpen && (
         <>
-          <TouchableOpacity className={'bg-slate-700 flex flex-row justify-between py-4 px-8'}
+          <TouchableOpacity className={'bg-slate-800 flex flex-row justify-between py-4 px-8'}
                             onPress={() => setIsCateroriesOpen(!isCateroriesOpen)}>
             <Text
               className={'text-white'}>Categories</Text>
             <Icon source={isCateroriesOpen ? 'chevron-down' : 'chevron-up'} size={20}/>
           </TouchableOpacity>
           {isCateroriesOpen && (
-            <View className={'flex flex-wrap flex-row gap-2 justify-center m-4'}>
+            <View className={'flex flex-wrap flex-row gap-2 justify-center p-4 bg-slate-400'}>
               {categories.data?.meals?.map((cat) => {
                 const isSelected = selectedCategory === cat.strCategory
                 return (

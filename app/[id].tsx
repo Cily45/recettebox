@@ -88,11 +88,23 @@ export default function MealScreen () {
               resizeMode="cover"
             />
 
-            <View className="p-5">
+            <View className={'p-5'}>
               <View className={'flex flex-row flex-wrap items-center mb-3'}>
                 <Text className="text-white text-3xl font-bold ">
                   {meal.strMeal}
                 </Text>
+              </View>
+              <View className=" flex flex-row justify-between items-center">
+                <View className="flex-row gap-3">
+                  {meal.strCategory &&
+                    (<View className="bg-orange-500 px-4 py-1.5 rounded-full">
+                      <Text className="text-white font-semibold">{meal.strCategory}</Text>
+                    </View>)}
+
+                  {meal.strArea && (<View className="bg-neutral-700 px-4 py-1.5 rounded-full">
+                    <Text className="text-gray-300">{meal.strArea}</Text>
+                  </View>)}
+                </View>
                 {isInFavorites && (
                   <IconButton icon="heart"
                               onPress={() => dispatch(removeItemFavorite(meal?.idMeal))}/>)
@@ -102,17 +114,6 @@ export default function MealScreen () {
                               onPress={() => dispatch(addItemFavorite(meal))}/>)
                 }
               </View>
-              <View className="flex-row gap-3 mb-8">
-                {meal.strCategory &&
-                  (<View className="bg-orange-500 px-4 py-1.5 rounded-full">
-                    <Text className="text-white font-semibold">{meal.strCategory}</Text>
-                  </View>)}
-
-                {meal.strArea && (<View className="bg-neutral-700 px-4 py-1.5 rounded-full">
-                  <Text className="text-gray-300">{meal.strArea}</Text>
-                </View>)}
-              </View>
-
               <Text className="text-white text-2xl font-bold mb-4">Ingrédients</Text>
               <View className="mb-8">
                 {getIngredients(meal).map((item) => (
@@ -126,9 +127,7 @@ export default function MealScreen () {
               <Text className="text-neutral-300 text-base leading-relaxed tracking-wide pb-10">
                 {meal.strInstructions}
               </Text>
-              <Text className="text-neutral-300 text-base leading-relaxed tracking-wide pb-10">
-                {meal.strYoutube}
-              </Text>
+
               <YoutubePlayer
                 height={300}
                 play={playing}
@@ -142,9 +141,11 @@ export default function MealScreen () {
             </View>
           </ScrollView>
         )}
-      {isLoading && (
-        <ActivityIndicator className={'h-full'} animating={true}/>
-      )}
+      {
+        isLoading && (
+          <ActivityIndicator className={'h-full'} animating={true}/>
+        )
+      }
 
       <Snackbar
         visible={visible}
